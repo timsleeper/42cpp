@@ -2,7 +2,6 @@
 #include <iostream>
 #include <ctime>
 
-
 // Static member variable definitions
 int Account::_nbAccounts = 0;         // Initialize number of accounts to 0
 int Account::_totalAmount = 0;        // Initialize total amount to 0
@@ -26,42 +25,44 @@ Account::Account(int initial_deposit)
 // Destructor implementation
 Account::~Account(void)
 {
-    _nbAccounts--;                   // Decrement number of accounts
-    _totalAmount -= _amount;         // Subtract current account balance from total amount
-    _totalNbDeposits -= _nbDeposits; // Subtract current account's deposits from total deposits
-    _totalNbWithdrawals -= _nbWithdrawals;
-    _displayTimestamp();
+    _nbAccounts--;                         // Decrement number of accounts
+    _totalAmount -= _amount;               // Subtract current account balance from total amount
+    _totalNbDeposits -= _nbDeposits;       // Subtract current account's deposits from total deposits
+    _totalNbWithdrawals -= _nbWithdrawals; // Subtract current account's withdrawals from total withdrawals
+    _displayTimestamp();                   // Display current timestamp for logging purposes
     std::cout << "index:" << _accountIndex << ";amount:" << _amount
-              << ";closed" << std::endl;
+              << ";closed" << std::endl; // Print account closing message
 }
 
+// Deposit implementation
 void Account::makeDeposit(int deposit)
 {
-    _displayTimestamp();
+    _displayTimestamp(); // Display current timestamp
     std::cout << "index:" << _accountIndex << ";p_amount:" << _amount << ";deposit:"
               << deposit << ";amount:" << _amount + deposit << ";nb_deposits:"
-              << _nbDeposits + 1 << std::endl;
-    _amount += deposit;
-    _nbDeposits++;
-    _totalAmount += deposit;
-    _totalNbDeposits++;
+              << _nbDeposits + 1 << std::endl; // Print deposit message
+    _amount += deposit;                        // Add deposit amount to account balance
+    _nbDeposits++;                             // Increment number of deposits for account
+    _totalAmount += deposit;                   // Add deposit amount to total amount
+    _totalNbDeposits++;                        // Increment total number of deposits
 }
 
+// Withdrawal implementation
 bool Account::makeWithdrawal(int withdrawal)
 {
-    _displayTimestamp();
+    _displayTimestamp(); // Display current timestamp
     std::cout << "index:" << _accountIndex << ";p_amount:" << _amount << ";withdrawal:"
               << withdrawal;
     if (withdrawal > _amount)
-    {
-        std::cout << ";refused" << std::endl;
+    {                                         // If withdrawal amount is greater than account balance
+        std::cout << ";refused" << std::endl; // Print refusal message and return false
         return false;
     }
     std::cout << ";amount:" << _amount - withdrawal << ";nb_withdrawals:"
-              << _nbWithdrawals + 1 << std::endl;
-    _amount -= withdrawal;
-    _nbWithdrawals++;
-    _totalAmount -= withdrawal;
+              << _nbWithdrawals + 1 << std::endl; // Print withdrawal message
+    _amount -= withdrawal;                        // Subtract withdrawal amount from account balance
+    _nbWithdrawals++;                             // Increment number of withdrawals for account
+    _totalAmount -= withdrawal;                   // Subtract withdrawal amount from total amount
     _totalNbWithdrawals++;
     return true;
 }
