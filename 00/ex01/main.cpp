@@ -3,6 +3,7 @@
 #include "phonebook.hpp"
 #include "contact.hpp"
 
+// Adds a new contact to the phonebook
 void add_contact(PhoneBook &phonebook)
 {
     std::string first_name, last_name, nickname, phone_number, darkest_secret;
@@ -26,15 +27,25 @@ void add_contact(PhoneBook &phonebook)
     phonebook.add_contact(new_contact);
 }
 
+// Searches for a contact in the phonebook and displays its details
 void search_contact(PhoneBook &phonebook)
 {
     phonebook.display_contacts();
 
     int index;
     std::cout << "Enter the index of the contact to display: ";
-    std::cin >> index;
 
-    phonebook.display_contact_details(index);
+    if (std::cin >> index)
+    {
+        std::cin.ignore();
+        phonebook.display_contact_details(index);
+    }
+    else
+    {
+        std::cout << "Invalid input. PLease enter a valid index." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 }
 
 int main()

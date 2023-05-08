@@ -2,15 +2,18 @@
 #include <iomanip>
 #include "contact.hpp"
 
+// Default constructor
 Contact::Contact() {}
 
-Contact::Contact(const std::string &first_name, const std::string &last_name,
-                 const std::string &nickname, const std::string &phone_number,
-                 const std::string &darkest_secret)
+// Constructor with parameters for contact details
+Contact::Contact(std::string first_name, std::string last_name,
+                 std::string nickname, std::string phone_number,
+                 std::string darkest_secret)
     : first_name(first_name), last_name(last_name), nickname(nickname),
       phone_number(phone_number), darkest_secret(darkest_secret) {}
 
-void Contact::display_field(const std::string &field) const
+// Displays a single field of the contact with proper formatting
+void Contact::display_field(std::string field) const
 {
     if (field.length() > 10)
     {
@@ -23,6 +26,7 @@ void Contact::display_field(const std::string &field) const
     std::cout << '|';
 }
 
+// Displays the summary of the contact
 void Contact::display_summary() const
 {
     display_field(first_name);
@@ -30,6 +34,7 @@ void Contact::display_summary() const
     display_field(nickname);
 }
 
+// Displays the full details of the contact
 void Contact::display_full() const
 {
     std::cout << "First Name: " << first_name << std::endl;

@@ -6,11 +6,18 @@
 class Contact
 {
 public:
+    // Default constructor
     Contact();
-    Contact(const std::string &first_name, const std::string &last_name,
-            const std::string &nickname, const std::string &phone_number,
-            const std::string &darkest_secret);
+
+    // Constructor with parameters for contact details
+    Contact(std::string first_name, std::string last_name,
+            std::string nickname, std::string phone_number,
+            std::string darkest_secret);
+
+    // Displays the summary of the contact
     void display_summary() const;
+
+    // Displays the full details of the contact
     void display_full() const;
 
 private:
@@ -20,7 +27,8 @@ private:
     std::string phone_number;
     std::string darkest_secret;
 
-    void display_field(const std::string &field) const;
+    // Displays a single field of the contact with proper formatting
+    void display_field(std::string field) const;
 };
 
 #endif

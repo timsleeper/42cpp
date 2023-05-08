@@ -2,9 +2,11 @@
 #include <iomanip>
 #include "phonebook.hpp"
 
+// Constructor
 PhoneBook::PhoneBook() : contact_count(0) {}
 
-void PhoneBook::add_contact(const Contact &new_contact)
+// Adds a contact to the phonebook
+void PhoneBook::add_contact(Contact new_contact)
 {
     if (contact_count < MAX_CONTACTS)
     {
@@ -20,6 +22,7 @@ void PhoneBook::add_contact(const Contact &new_contact)
     }
 }
 
+// Displays the summary of all contacts in the phonebook
 void PhoneBook::display_contacts() const
 {
     std::cout << std::setw(10) << "Index" << '|';
@@ -35,6 +38,7 @@ void PhoneBook::display_contacts() const
     }
 }
 
+// Displays the details of a contact with the given index
 void PhoneBook::display_contact_details(int index) const
 {
     if (index >= 0 && index < contact_count)
