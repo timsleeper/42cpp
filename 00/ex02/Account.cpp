@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ctime>
 
+
 // Static member variable definitions
 int Account::_nbAccounts = 0;         // Initialize number of accounts to 0
 int Account::_totalAmount = 0;        // Initialize total amount to 0
