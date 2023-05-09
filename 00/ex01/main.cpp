@@ -1,27 +1,37 @@
 #include <iostream>
 #include <string>
+#include <limits>
 #include "phonebook.hpp"
 #include "contact.hpp"
+
+bool read_non_empty_input(std::string &input, const std::string &prompt)
+{
+    std::cout << prompt;
+    std::getline(std::cin, input);
+    if (std::cin.eof())
+    {
+        std::cout << std::endl
+                  << "Empty values are invalid. Exiting." << std::endl;
+        return false;
+    }
+    return !input.empty();
+}
 
 // Adds a new contact to the phonebook
 void add_contact(PhoneBook &phonebook)
 {
     std::string first_name, last_name, nickname, phone_number, darkest_secret;
 
-    std::cout << "Enter the first name: ";
-    std::getline(std::cin, first_name);
-
-    std::cout << "Enter the last name: ";
-    std::getline(std::cin, last_name);
-
-    std::cout << "Enter the nickname: ";
-    std::getline(std::cin, nickname);
-
-    std::cout << "Enter the phone number: ";
-    std::getline(std::cin, phone_number);
-
-    std::cout << "Enter the darkest secret: ";
-    std::getline(std::cin, darkest_secret);
+    if (!read_non_empty_input(first_name, "Enter the first name: "))
+        return;
+    if (!read_non_empty_input(last_name, "Enter the last name: "))
+        return;
+    if (!read_non_empty_input(nickname, "Enter the nickname: "))
+        return;
+    if (!read_non_empty_input(phone_number, "Enter the phone number: "))
+        return;
+    if (!read_non_empty_input(darkest_secret, "Enter the darkest secret: "))
+        return;
 
     Contact new_contact(first_name, last_name, nickname, phone_number, darkest_secret);
     phonebook.add_contact(new_contact);
@@ -35,17 +45,18 @@ void search_contact(PhoneBook &phonebook)
     int index;
     std::cout << "Enter the index of the contact to display: ";
 
-    if (std::cin >> index)
+    while (!(std::cin >> index))
     {
-        std::cin.ignore();
-        phonebook.display_contact_details(index);
+        if (std::cin.eof())
+        {
+            return;
+        }
+        std::cout << "Invalid input. Please enter a valid index: ";
+        std::cin.clear();                                                   // Clear the error state
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the rest of the line
     }
-    else
-    {
-        std::cout << "Invalid input. PLease enter a valid index." << std::endl;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
+    std::cin.ignore(); // Ignore the remaining newline character
+    phonebook.display_contact_details(index);
 }
 
 int main()
@@ -55,8 +66,10 @@ int main()
 
     while (true)
     {
-        std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
-        std::getline(std::cin, command);
+        if (!read_non_empty_input(command, "Please enter a command (ADD, SEARCH, or EXIT): "))
+        {
+            break;
+        }
 
         if (command == "ADD")
         {

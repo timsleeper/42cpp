@@ -51,19 +51,18 @@ void Account::makeDeposit(int deposit)
 bool Account::makeWithdrawal(int withdrawal)
 {
     _displayTimestamp(); // Display current timestamp
-    std::cout << "index:" << _accountIndex << ";p_amount:" << _amount << ";withdrawal:"
-              << withdrawal;
+    std::cout << "index:" << _accountIndex << ";p_amount:" << _amount << ";withdrawal:";
     if (withdrawal > _amount)
-    {                                         // If withdrawal amount is greater than account balance
-        std::cout << ";refused" << std::endl; // Print refusal message and return false
+    {                                        // If withdrawal amount is greater than account balance
+        std::cout << "refused" << std::endl; // Print refusal message and return false
         return false;
     }
-    std::cout << ";amount:" << _amount - withdrawal << ";nb_withdrawals:"
+    std::cout << withdrawal << ";amount:" << _amount - withdrawal << ";nb_withdrawals:"
               << _nbWithdrawals + 1 << std::endl; // Print withdrawal message
     _amount -= withdrawal;                        // Subtract withdrawal amount from account balance
     _nbWithdrawals++;                             // Increment number of withdrawals for account
     _totalAmount -= withdrawal;                   // Subtract withdrawal amount from total amount
-    _totalNbWithdrawals++;
+    _totalNbWithdrawals++;                        // Increment total number of withdrawals
     return true;
 }
 
