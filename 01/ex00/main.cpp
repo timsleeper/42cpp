@@ -1,21 +1,12 @@
-#include <iostream>
 #include "Zombie.hpp"
 
 int main()
 {
+    Zombie *zombie1 = newZombie("Tim");
+    Zombie zombie2("Maia");
+    randomChump("Ed");
 
-    int num = 10;
-    Zombie *horde = zombieHorde(num, "Tim");
-    if (horde == NULL)
-    {
-        std::cerr << "Failed to create zombie horde" << std::endl;
-        return 1;
-    }
-
-    for (int i = 0; i < num; i++)
-        horde[i].announce();
-
-    delete[] horde;
+    delete zombie1;
 
     return 0;
 }
