@@ -25,14 +25,17 @@ void Harl::error(void)
 void Harl::complain(std::string level)
 {
     typedef void (Harl::*HarlFunction)(void);
-    std::map<std::string, HarlFunction> functions;
 
-    functions["DEBUG"] = &Harl::debug;
-    functions["INFO"] = &Harl::info;
-    functions["WARNING"] = &Harl::warning;
-    functions["ERROR"] = &Harl::error;
+    const char *logLevels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    HarlFunction funcs[] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+    size_t numLogLevels = sizeof(logLevels) / sizeof(logLevels[0]);
 
-    HarlFunction func = functions[level];
-    if (func)
-        (this->*func)();
+    for (size_t i = 0; i < numLogLevels; ++i)
+    {
+        if (logLevels[i] == level)
+        {
+            (this->*funcs[i])();
+            break;
+        }
+    }
 }
