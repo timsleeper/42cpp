@@ -35,5 +35,15 @@ public:
 
     static Fixed& min(Fixed& a, Fixed& b);
     static const Fixed& min(const Fixed& a, const Fixed& b);
+    static Fixed& max(Fixed& a, Fixed& b);
+    static const Fixed& max(const Fixed& a, const Fixed& b);
+
+private:
+    int _value;
+    static const int _fractionalBits = 8;
 
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixedPoint);
+
+#endif
