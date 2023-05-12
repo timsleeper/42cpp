@@ -34,7 +34,6 @@ Fixed& Fixed::operator=(const Fixed& src){
 }
 
 int Fixed::getRawBits() const{
-    std::cout << "getRawBits member function called" << std::endl;
     return this->_value;
 }
 
@@ -50,3 +49,7 @@ int Fixed::toInt() const {
     return _value >> _fractionalBits;
 }
 
+std::ostream& operator<<(std::ostream& os, const Fixed& fixedPoint){
+    os << fixedPoint.toFloat();
+    return os;
+}
