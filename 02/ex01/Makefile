@@ -1,4 +1,4 @@
-NAME = fixed_point_test
+NAME = fixed_point
 
 CC = c++
 FLAGS = -Werror -Wextra -Wall -std=c++98
