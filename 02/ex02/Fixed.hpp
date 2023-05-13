@@ -28,7 +28,7 @@ public:
     Fixed &operator--();   // Prefix decrement
     Fixed operator--(int); // Postfix decrement
 
-    int getRawBits() const;
+    int getRawBits(void) const;
     void setRawBits(int const raw);
 
     float toFloat() const;
