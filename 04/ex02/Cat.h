@@ -4,20 +4,21 @@
 #include "AAnimal.h"
 #include "Brain.h"
 
-class Cat : public AAnimal {
+class Cat : public AAnimal
+{
 public:
     Cat();
-    Cat(const Cat& other);
-    Cat& operator=(const Cat& other);
-    ~Cat();
+    Cat(const Cat &other);
+    Cat &operator=(const Cat &other);
+    virtual ~Cat();
 
     std::string getType() const;
     void makeSound() const;
     std::string getIdea(int index) const;
-    void setIdea(int index, const std::string& idea);
+    void setIdea(int index, const std::string &idea);
 
 private:
-    Brain* brain;
+    Brain *brain;
 };
 
 #endif

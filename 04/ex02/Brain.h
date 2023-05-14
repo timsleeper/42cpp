@@ -3,12 +3,13 @@
 
 #include <string>
 
-class Brain{
+class Brain
+{
 public:
     Brain();
-    Brain(const Brain& brain);
-    Brain& operator=(const Brain& brain);
-    ~Brain();
+    Brain(const Brain &brain);
+    Brain &operator=(const Brain &brain);
+    virtual ~Brain();
 
     std::string getIdea(int index) const;
     void setIdea(int index, std::string idea);

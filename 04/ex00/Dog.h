@@ -3,12 +3,13 @@
 
 #include "Animal.h"
 
-class Dog : public Animal {
+class Dog : public Animal
+{
 public:
     Dog();
-    Dog(const Dog& other);
-    Dog& operator=(const Dog& other);
-    ~Dog();
+    Dog(const Dog &other);
+    Dog &operator=(const Dog &other);
+    virtual ~Dog();
 
     std::string getType() const;
     void makeSound() const;
