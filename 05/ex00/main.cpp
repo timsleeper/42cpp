@@ -4,7 +4,7 @@
 int main()
 {
     // Test valid creation of Bureaucrat
-    Bureaucrat b1("Fulano", 100);
+    Bureaucrat b1("Bob", 100);
     std::cout << b1 << std::endl;
 
     // Test incrementing grade
@@ -18,7 +18,7 @@ int main()
     // Test grade too high exception
     try
     {
-        Bureaucrat b2("Ciclano", 0);
+        Bureaucrat b2("John", 0);
         std::cout << b2 << std::endl;
     }
     catch (const std::exception &e)
