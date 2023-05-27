@@ -1,46 +1,55 @@
 #include <iostream>
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.h"
+#include "PresidentialPardonForm.h"
+
 
 int main() {
-    // Test Bureaucrat creation and grade modifications
-    try {
-        Bureaucrat john("John", 50);
-        std::cout << john << std::endl;
 
-        john.incrementGrade();
-        std::cout << john << std::endl;
+    std::cout << "Bureaucrat: Required grades: 1-150" << std::endl;
 
-        john.decrementGrade();
-        std::cout << john << std::endl;
+    std::cout << "Testing creating a Bureau with grade 151" << std::endl;
+    try{
+        Bureaucrat Lincoln("Lincoln", 151);
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
 
-    // Test Form creation, signing and execution
-    Bureaucrat john("John", 50);
-    Bureaucrat boss("Boss", 1);
+    std::cout << "Testing creating a Bureau with grade 151" << std::endl;
+    try{
+        Bureaucrat Lincoln("Lincoln", -1);
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
 
-    ShrubberyCreationForm shrubberyForm("Home");
-    RobotomyRequestForm robotomyForm("Target1");
-    PresidentialPardonForm pardonForm("Target2");
+    std::cout << "Testing creating a Bureaucrat Obama with grade 1" << std::endl;
+    Bureaucrat Obama("Obama", 1);
+    std::cout << Obama;
 
-    // Signing forms
-    boss.signForm(shrubberyForm);
-    boss.signForm(robotomyForm);
-    boss.signForm(pardonForm);
+    std::cout << "Incrementing grade already at maximum (1)" << std::endl;
+    try {
+        Obama.incrementGrade();
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+    std::cout << Obama;
 
-    // John tries to execute the forms (should fail due to low grade)
-    john.executeForm(shrubberyForm);
-    john.executeForm(robotomyForm);
-    john.executeForm(pardonForm);
+    std::cout << "Testing decrementing grade. Should be (2)" << std::endl;
+    try {
+        Obama.decrementGrade();
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+    std::cout << Obama;
 
-    // Boss executes the forms
-    boss.executeForm(shrubberyForm);
-    boss.executeForm(robotomyForm);
-    boss.executeForm(pardonForm);
+    PresidentialPardonForm form("Hillary Clinton");
+    try {
+        Obama.signForm(form);
+        Obama.executeForm(form);
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
 
+    std::cout << "ShrubberyCreationForm: Required grades: sign 145, exec 137" << std::endl;
     return 0;
+
 }

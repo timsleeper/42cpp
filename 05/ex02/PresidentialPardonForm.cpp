@@ -1,43 +1,26 @@
-#include <iostream>
 #include "PresidentialPardonForm.hpp"
-#include "Bureaucrat.hpp"
+#include <iostream>
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm("PresidentialPardonForm", 25, 5), target(target)
-{
-}
+PresidentialPardonForm::PresidentialPardonForm() : AForm("default", 25, 5), _target("default") {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other)
-{
-    *this = other;
-}
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm("PresidentialPardonForm", 25, 5), _target(target) {}
 
-PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
-{
-    if (this != &other)
-    {
-        AForm::operator=(other);
-        target = other.target;
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &obj) : AForm(obj), _target(obj._target) {}
+
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &obj) {
+    if (this != &obj) {
+        AForm::operator=(obj);
     }
     return *this;
 }
 
-PresidentialPardonForm::~PresidentialPardonForm()
-{
+PresidentialPardonForm::~PresidentialPardonForm() {}
+
+const std::string &PresidentialPardonForm::getTarget() const {
+    return _target;
 }
 
-void PresidentialPardonForm::beSigned(const Bureaucrat &bureaucrat)
-{
-    if (bureaucrat.getGrade() > this->getSignGrade())
-        throw AForm::GradeTooLowException();
-
-    std::cout << target << " has been pardoned by Zaphod Beeblebrox\n";
+void PresidentialPardonForm::executeOK() const {
+    std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
-void PresidentialPardonForm::execute(const Bureaucrat &executor) const {
-    if (!this->isSigned())
-        throw AForm::FormNotSignedException();
-    if (executor.getGrade() > this->getExecuteGrade())
-        throw AForm::GradeTooLowException();
-
-    std::cout << target << " has been pardoned by Zaphod Beeblebrox\n";
-}

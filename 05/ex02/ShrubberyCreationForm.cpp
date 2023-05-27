@@ -1,50 +1,43 @@
-#include <fstream>
 #include "ShrubberyCreationForm.hpp"
-#include "Bureaucrat.hpp"
+#include <fstream>
+#include <iostream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137), target(target)
-{
-}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("default", 145, 137), _target("default") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other)
-{
-    *this = other;
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
-{
-    if (this != &other)
-    {
-        AForm::operator=(other);
-        target = other.target;
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &obj) : AForm(obj), _target(obj._target) {}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &obj) {
+    if (this != &obj) {
+        AForm::operator=(obj);
     }
     return *this;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+
+const std::string &ShrubberyCreationForm::getTarget() const {
+    return _target;
 }
 
-void ShrubberyCreationForm::beSigned(const Bureaucrat &bureaucrat)
-{
-    if (bureaucrat.getGrade() > this->getSignGrade())
-        throw AForm::GradeTooLowException();
-    std::ofstream ofs(target + "_shrubbery");
-    if (ofs.fail())
-        throw std::runtime_error("Unable to create file");
-    ofs << "ASCII trees\n";
-    ofs.close();
-}
-
-void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
-{
-    if (!this->isSigned())
-        throw AForm::FormNotSignedException();
-    if (executor.getGrade() > this->getExecuteGrade())
-        throw AForm::GradeTooLowException();
-    std::ofstream ofs(target + "_shrubbery");
-    if (ofs.fail())
-        throw std::runtime_error("Unable to create file");
-    ofs << "ASCII trees\n";
-    ofs.close();
+void ShrubberyCreationForm::executeOK() const {
+    std::ofstream fileWrite;
+    std::string filename = _target + "_shrubbery";
+    fileWrite.open(filename.c_str());
+    if (fileWrite.fail()) {
+        std::cout << "Error opening file" << std::endl;
+        return;
+    }
+    fileWrite << "      ccee88oo\n";
+    fileWrite << "   C8O8O8Q8PoOb o8oo\n";
+    fileWrite << "dOB69QO8PdUOpugoO9bD\n";
+    fileWrite << "CgggbU8OU qOp qOdoUOdcb\n";
+    fileWrite << "         8UU  /pU  8UU\n";
+    fileWrite << "          \\\\\\//  \\\\\\//\n";
+    fileWrite << "           |||    |||\n";
+    fileWrite << "           |||    |||\n";
+    fileWrite << "           |||    |||\n";
+    fileWrite << "  ..........//     \\\\..........\n";
+    fileWrite.close();
 }

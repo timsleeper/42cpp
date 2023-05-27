@@ -4,19 +4,21 @@
 #include <string>
 #include "AForm.hpp"
 
-class RobotomyRequestForm : public AForm
-{
+class RobotomyRequestForm : public AForm {
+private:
+    const std::string _target;
+
 public:
+    RobotomyRequestForm();
     RobotomyRequestForm(const std::string &target);
-    RobotomyRequestForm(const RobotomyRequestForm &other);
-    RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
+    RobotomyRequestForm(const RobotomyRequestForm &obj);
+    RobotomyRequestForm &operator=(const RobotomyRequestForm &obj);
     virtual ~RobotomyRequestForm();
 
-    void beSigned(const Bureaucrat &bureaucrat);
-    void execute(Bureaucrat const &executor) const;
+    const std::string &getTarget() const;
 
-private:
-    std::string target;
+    virtual void executeOK() const;
+
 };
 
 #endif
