@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Bureaucrat.h"
-#include "PresidentialPardonForm.h"
-#include "RobotomyRequestForm.h"
-#include "ShrubberyCreationForm.h"
+#include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 
 int main() {
