@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Bureaucrat.h"
-#include "PresidentialPardonForm.h"
+#include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
 
 
 int main() {
