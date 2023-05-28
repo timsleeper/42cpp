@@ -3,7 +3,7 @@ NAME = span
 CC = c++
 FLAGS = -Werror -Wextra -Wall -std=c++98
 
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 
 all : $(NAME)
 
